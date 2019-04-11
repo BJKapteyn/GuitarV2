@@ -71,7 +71,7 @@ h1 {
 	grid-area: right;
 }
 
-.display {
+.displayWindow {
 	-ms-grid-row: 1;
 	-ms-grid-column: 2;
 	grid-area: display;
@@ -88,6 +88,19 @@ h1 {
 	border-radius: 10px;
 	background-color: rgb(200, 200, 200)
 }
+
+
+#displayFret {
+	height: 80%;
+	width: auto;
+	font-size: 200;
+	margin: auto;
+	text-align: center;
+}
+
+#displayAnswerButton {
+	height: 20%;
+}	
 
 .notesButts {
 	white-space: none;

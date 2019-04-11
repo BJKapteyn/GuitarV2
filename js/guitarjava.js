@@ -1,3 +1,17 @@
+/*to do:
+		XSwitch the strings from counting up to down    
+		-add notes
+			-aS
+			-b
+			-c
+			-cS
+			-dS
+			-f
+			-fS
+			-gS
+
+
+*/
 let masterAnswer = [];
 
 let masterQuestion = [];
@@ -33,26 +47,27 @@ let offButtons = {
 	12: document.getElementById('gSOff'),	
 }
 
+
 /*store control button ids*/
 let userButtons = {
-	1: document.getElementById("noteAndString"),
-	2: document.getElementById("fretAndString"),
-	3: document.getElementById("clear")
+	Note: document.getElementById("noteAndString"),
+	Fret: document.getElementById("fretAndString"),
+	Clear: document.getElementById("clear")
 }
 
  /*store question and answer arrays*/
 let questions = {
-	1: ['A-1', 'A-2', 'A-3', 'A-4', 'A-5', 'A-6'],
+	1: ['A-6', 'A-5', 'A-4', 'A-3', 'A-2', 'A-1'],
 	2: [],
 	3: [],
 	4: [],
 	5: [],
-	6: ['D-1', 'D-2', 'D-3', 'D-4', 'D-5', 'D-6'],
+	6: ['D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1'],
 	7: [],
-	8: ['E-1', 'E-2', 'E-3', 'E-4', 'E-5', 'E-6'],
+	8: ['E-6', 'E-5', 'E-4', 'E-3', 'E-2', 'E-1'],
 	9: [],
 	10: [],
-	11: ['G-1', 'G-2', 'G-3', 'G-4', 'G-5', 'G-6'],
+	11: ['G-6', 'G-5', 'G-4', 'G-3', 'G-2', 'G-1'],
 	12: []
 }
 
@@ -102,24 +117,27 @@ function turnOn(onId, offId) {
 
 function makeItHappenOn(question, answer, onId, offId) {
 	var number = question[0];
-	if (!masterQuestion.includes(number)){
-		smashQuestionArr(question);
-		smashAnswerArr(answer);
+	if(question.length > 0) {
+		if (!masterQuestion.includes(number)){
+			smashQuestionArr(question);
+			smashAnswerArr(answer);
+		}
 	}
 	turnOn(onId, offId);
 }
 
 function makeItHappenOff(question, answer, onId, offId) {
-	debugger;
-	breakQuestionArr(question);
-	breakAnswerArr(answer);
+	if(question.length > 0){
+
+		breakQuestionArr(question);
+		breakAnswerArr(answer);
+	}
 	turnOff(onId, offId)
 }
 
 /*creates event listener for every switch button*/
 for (var i = 1; i <= 12; i++) {
 	(function() {
-		debugger;
 		let on = onButtons[i];
 		let off = offButtons[i];
 		let question = questions[i];
@@ -128,6 +146,41 @@ for (var i = 1; i <= 12; i++) {
 		off.addEventListener('click', makeItHappenOff.bind(this, question, answer, on, off))
 	})()
 }
+
+userButtons.Note.addEventListener('click', showFret);
+
+
+function makeRandom() {
+	var x = Math.floor(Math.random() * masterAnswer.length);
+	console.log(x);
+	return x;
+}
+
+function showAnswer(target, random) {
+	let answerButton = document.getElementById("theAnswer");
+	answerButton.addEventListener('click', function(event) {
+		event.preventDefault();
+		target.textContent = masterAnswer[random];
+	})
+}
+
+function createAnswerButton(target, random) {
+	let displayFret = document.getElementById("displayAnswerButton");
+	displayFret.innerHTML = '<input id="theAnswer" type=\"button\" accesskey="a" value=\"Answer\">';
+	showAnswer(target, random);
+
+}
+
+//display fret note and answer button
+function showFret() {
+	let randomNote = makeRandom();
+	let displayFret = document.getElementById("displayFret");
+
+	displayFret.textContent = masterQuestion[randomNote];
+	createAnswerButton(displayFret, randomNote)
+}
+
+
 
 
 
