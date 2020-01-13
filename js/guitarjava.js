@@ -166,7 +166,7 @@ function showAnswer(target, random) {
 
 function createAnswerButton(target, random) {
 	let displayFret = document.getElementById("displayAnswerButton");
-	displayFret.innerHTML = '<input id="theAnswer" type=\"button\" accesskey="a" value=\"Answer\">';
+	displayFret.innerHTML = '<input id=\"theAnswer\" type=\"button\" accesskey=\"a\" value=\"Answer\">';
 	showAnswer(target, random);
 
 }
