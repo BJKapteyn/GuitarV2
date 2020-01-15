@@ -219,3 +219,9 @@ h1 {
 	grid-area: foot;
 	background-color: rgb(216, 222, 252);
 }
+
+#theAnswer {
+	text-align: center;
+	margin: auto;
+	display: block;
+}

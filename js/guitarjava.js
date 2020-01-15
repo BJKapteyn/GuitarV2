@@ -167,14 +167,19 @@ function createAnswerButton(target, random) {
 
 //display fret note and answer button
 function showFret() {
-	let randomNote = makeRandom();
+	let arrLength = masterQuestion.length;
+	if(arrLength != 0) {
+		let randomNote = makeRandom();
 
-	userButtons.displayFret.textContent = masterQuestion[randomNote];
-	createAnswerButton(displayFret, randomNote)
+		userButtons.displayFret.textContent = masterQuestion[randomNote];
+		createAnswerButton(displayFret, randomNote)
+	}
+	else {
+		console.log('No notes selected');
+	}
 }
 
 function clearWindow() {
-	debugger;
 	userButtons.displayFret.textContent = '';
 }
 
