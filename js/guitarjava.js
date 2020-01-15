@@ -1,14 +1,5 @@
 /*to do:
-		XSwitch the strings from counting up to down    
-		-add notes
-			-aS
-			-b
-			-c
-			-cS
-			-dS
-			-f
-			-fS
-			-gS
+		
 
 
 */
@@ -52,7 +43,8 @@ let offButtons = {
 let userButtons = {
 	Note: document.getElementById("noteAndString"),
 	Fret: document.getElementById("fretAndString"),
-	Clear: document.getElementById("clear")
+	Clear: document.getElementById("clear"),
+	displayFret: document.getElementById("displayFret")
 }
 
  /*store question and answer arrays*/
@@ -105,6 +97,8 @@ function breakQuestionArr(index) {
 	masterQuestion.splice(number, 6);
 }
 
+/*-------------------switching button color--------------------------------------*/
+
 function turnOff(onId, offId) {
 	onId.className = 'black l';
 	offId.className = 'white r';
@@ -147,7 +141,7 @@ for (var i = 1; i <= 12; i++) {
 	})()
 }
 
-userButtons.Note.addEventListener('click', showFret);
+
 
 
 function makeRandom() {
@@ -174,44 +168,15 @@ function createAnswerButton(target, random) {
 //display fret note and answer button
 function showFret() {
 	let randomNote = makeRandom();
-	let displayFret = document.getElementById("displayFret");
 
-	displayFret.textContent = masterQuestion[randomNote];
+	userButtons.displayFret.textContent = masterQuestion[randomNote];
 	createAnswerButton(displayFret, randomNote)
 }
 
-
-
-
-
-/*
-doesn't work because with every iteration, i changes permenantly and isn't bound to each iteration of loop. 
-(function() {
-	for (var i = 1; i <= 12; i++) {
-		let on = onButtons[i];
-		let off = offButtons[i];
-		on.addEventListener('click', function() {
-			if (questions[i].length > 0) {
-				smashQuestionArr(questions[i]);
-				smashAnswerArr(answers[i])
-			}
-			on.className = "white l";
-			off.className = "black r";
-		})
-		off.addEventListener('click', function() {
-			if (masterQuestion.includes(questions[i][0])) {
-				breakQuestionArr(questions[i][0]);
-				breakAnswerArr(answers[i][0]);
-			}
-			on.className = "black l";
-			off.className = "white r";
-		})
-	}
-})()
-
-function addEm(obj, index) {
-
+function clearWindow() {
+	debugger;
+	userButtons.displayFret.textContent = '';
 }
 
-*/
-
+userButtons.Note.addEventListener('click', showFret);
+userButtons.Clear.addEventListener('click', clearWindow);
