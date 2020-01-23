@@ -140,7 +140,7 @@ for (var i = 1; i <= 12; i++) {
 		off.addEventListener('click', makeItHappenOff.bind(this, question, answer, on, off))
 	})()
 }
-
+/*hey what up*/
 
 
 
