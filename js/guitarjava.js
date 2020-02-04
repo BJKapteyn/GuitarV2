@@ -106,6 +106,7 @@ function addToArray(arrayToAdd, mainArray) {
 }
 
 function removeFromArray(arrayToRemove, mainArray) {
+	debugger;
 	var number = mainArray.indexOf(arrayToRemove[0]);
 	mainArray.splice(number, 6);
 }
@@ -134,17 +135,16 @@ function makeItHappenOn(question, answer, noteAnswer, onId, offId) {
 			addToArray(question, masterQuestion);
 			addToArray(answer, masterAnswer);
 			addToArray(noteAnswer, masterNoteAnswer);
-			smashAnswerArr(answer);
 		}
 	}
 	turnOn(onId, offId);
 }
 
-function makeItHappenOff(question, answer, onId, offId) {
+function makeItHappenOff(question, answer, noteAnswer, onId, offId) {
 	if(question.length > 0){
-
-		breakQuestionArr(question);
-		breakAnswerArr(answer);
+		removeFromArray(question, masterQuestion);
+		removeFromArray(answer, masterAnswer);
+		removeFromArray(noteAnswer, masterNoteAnswer);
 	}
 	turnOff(onId, offId);
 }
