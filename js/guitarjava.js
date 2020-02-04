@@ -3,9 +3,12 @@
 
 
 */
+//array for string - fret positions
 let masterAnswer = [];
-
+//array for note - fret positions
 let masterQuestion = [];
+//array for notes
+let masterNoteAnswer = [];
 
 /*store on/off button ids*/
 let onButtons = {
@@ -94,23 +97,23 @@ let noteAnswers = {
 }
 
 /*-------------------functions for creating array of notes----------------------*/ 
-function smashAnswerArr(arr) {
-	masterAnswer.push(...arr);
+// function smashAnswerArr(arr) {
+// 	masterAnswer.push(...arr);
+// }
+
+function addToArray(arrayToAdd, mainArray) {
+	mainArray.push(...arrayToAdd);
 }
 
-function smashQuestionArr(arr) {
-	masterQuestion.push(...arr);
+function removeFromArray(arrayToRemove, mainArray) {
+	var number = mainArray.indexOf(arrayToRemove[0]);
+	mainArray.splice(number, 6);
 }
 
-function breakAnswerArr(index) {
-	var number = masterAnswer.indexOf(index[0]);
-	masterAnswer.splice(number, 6);
-}
-
-function breakQuestionArr(index) {
-	var number = masterQuestion.indexOf(index[0]);
-	masterQuestion.splice(number, 6);
-}
+// function breakQuestionArr(index) {
+// 	var number = masterQuestion.indexOf(index[0]);
+// 	masterQuestion.splice(number, 6);
+// }
 
 /*-------------------switching button color--------------------------------------*/
 
@@ -124,11 +127,13 @@ function turnOn(onId, offId) {
 	offId.className = 'black r';
 }
 
-function makeItHappenOn(question, answer, onId, offId) {
+function makeItHappenOn(question, answer, noteAnswer, onId, offId) {
 	var number = question[0];
 	if(question.length > 0) {
 		if (!masterQuestion.includes(number)){
-			smashQuestionArr(question);
+			addToArray(question, masterQuestion);
+			addToArray(answer, masterAnswer);
+			addToArray(noteAnswer, masterNoteAnswer);
 			smashAnswerArr(answer);
 		}
 	}
@@ -141,7 +146,7 @@ function makeItHappenOff(question, answer, onId, offId) {
 		breakQuestionArr(question);
 		breakAnswerArr(answer);
 	}
-	turnOff(onId, offId)
+	turnOff(onId, offId);
 }
 
 /*creates event listener for every switch button*/
@@ -151,8 +156,9 @@ for (var i = 1; i <= 12; i++) {
 		let off = offButtons[i];
 		let question = questions[i];
 		let answer = answers[i];
-		on.addEventListener('click', makeItHappenOn.bind(this, question, answer, on, off))
-		off.addEventListener('click', makeItHappenOff.bind(this, question, answer, on, off))
+		let noteAnswer = noteAnswers[i];
+		on.addEventListener('click', makeItHappenOn.bind(this, question, answer, noteAnswer, on, off));
+		off.addEventListener('click', makeItHappenOff.bind(this, question, answer, noteAnswer, on, off));
 	})()
 }
 /*hey what up*/
