@@ -106,7 +106,6 @@ function addToArray(arrayToAdd, mainArray) {
 }
 
 function removeFromArray(arrayToRemove, mainArray) {
-	debugger;
 	var number = mainArray.indexOf(arrayToRemove[0]);
 	mainArray.splice(number, 6);
 }
@@ -165,35 +164,35 @@ for (var i = 1; i <= 12; i++) {
 
 
 
-function makeRandom() {
-	var x = Math.floor(Math.random() * masterAnswer.length);
+function makeRandom(array) {
+	var x = Math.floor(Math.random() * array.length);
 	console.log(x);
 	return x;
 }
 
-function showAnswer(target, random) {
+function showAnswer(target, random, answerArray) {
 	let answerButton = document.getElementById("theAnswer");
 	answerButton.addEventListener('click', function(event) {
 		event.preventDefault();
-		target.textContent = masterAnswer[random];
+		target.textContent = answerArray[random];
 	})
 }
 
-function createAnswerButton(target, random) {
+function createAnswerButton(target, random, answerArray) {
 	let displayFret = document.getElementById("displayAnswerButton");
 	displayFret.innerHTML = '<input id=\"theAnswer\" type=\"button\" accesskey=\"a\" value=\"Answer\">';
-	showAnswer(target, random);
+	showAnswer(target, random, answerArray);
 
 }
 
 //display fret note and answer button
-function showFret() {
-	let arrLength = masterQuestion.length;
+function showFret(questionArray, answerArray) {
+	let arrLength = questionArray.length;
 	if(arrLength != 0) {
-		let randomNote = makeRandom();
+		let randomNote = makeRandom(questionArray);
 
-		userButtons.displayFret.textContent = masterQuestion[randomNote];
-		createAnswerButton(displayFret, randomNote)
+		userButtons.displayFret.textContent = questionArray[randomNote];
+		createAnswerButton(displayFret, randomNote, answerArray);
 	}
 	else {
 		console.log('No notes selected');
@@ -204,5 +203,6 @@ function clearWindow() {
 	userButtons.displayFret.textContent = '';
 }
 
-userButtons.Note.addEventListener('click', showFret);
+userButtons.Note.addEventListener('click', () => {showFret(masterQuestion, masterAnswer)});
+userButtons.Fret.addEventListener('click', () => {showFret(masterAnswer, masterNoteAnswer)});
 userButtons.Clear.addEventListener('click', clearWindow);
